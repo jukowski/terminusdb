@@ -1504,6 +1504,10 @@ compile_wf(concat(L,A),Concat) -->
     resolve(L,LE),
     resolve(A,AE),
     { marshall_args(interpolate_string(LE,AE),Concat) }.
+compile_wf(ffi(L,A),FFI) -->
+    resolve(L,LE),
+    resolve(A,AE),
+    { marshall_args(utils:ffi_exec(LE,AE), FFI) }.
 compile_wf(trim(S,A),Trim) -->
     resolve(S,SE),
     resolve(A,AE),

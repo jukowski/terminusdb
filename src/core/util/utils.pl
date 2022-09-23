@@ -6,6 +6,7 @@
               zip/3,
               intersperse/3,
               interpolate/2,
+              ffi_exec/2,
               interpolate_string/2,
               unique_solutions/3,
               repeat_term/3,
@@ -274,6 +275,8 @@ interpolate_string([H|T],S) :-
     term_to_atom(H,C),
     interpolate_string(T,Rest) ,
     string_concat(C,Rest,S).
+
+ffi_exec([Cmd | Params], Result) :- atom_string(CmdAtom, Cmd), Prog =..[CmdAtom, Params, ResAtom], call(Prog), atom_string(ResAtom, Result).
 
 /**
  * unique_solutions(+Template,+Goal,-Collection) is det.
